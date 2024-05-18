@@ -10,7 +10,8 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
         title: 'HANDOCS',
+        debugShowCheckedModeBanner: false,
         routerConfig: Routefly.routerConfig(
-            routes: routes, initialPath: routePaths.login));
+            routes: routes, initialPath: routePaths.logo));
   }
 }

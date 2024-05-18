@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:routefly/routefly.dart';
 import '../components/button.dart';
+import '../helpers/constants.dart';
 
 class LogoPage extends StatefulWidget {
   const LogoPage({super.key});
@@ -17,25 +19,31 @@ class _LogoPageState extends State<LogoPage> {
           alignment: Alignment.center,
           //color: Colors.black87,
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: HDColor.bodyBackground,
             image: DecorationImage(
-              image: const AssetImage("images/hexagonos_digitais.jpg"),
+              image: const AssetImage("assets/images/hex.jpg"),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.12), BlendMode.dstATop),
             ),
           ),
           child: Column(children: [
-            const SizedBox(width: 100, height: 80),
+            const SizedBox(width: 30, height: 180),
             const Image(
-              image: AssetImage('images/logo.png'),
-              width: 200,
-              height: 200,
+              image: AssetImage('assets/images/logo.png'),
+              width: 250,
+              height: 250,
             ),
-            const SizedBox(width: 100, height: 80),
-            HDButton.defaultButton('ENTRAR'),
-            HDButton.defaultButton('CADASTRAR'),
+            const SizedBox(width: 30, height: 80),
+            HDButton.defaultButton('ENTRAR', _gotoLogin),
+            const SizedBox(width: 70, height: 20),
+            HDButton.defaultButton('CADASTRAR', _gotoLogin),
           ])),
     );
   }
+
+  void _gotoLogin(){
+    Routefly.push('login');
+  }
+
 }

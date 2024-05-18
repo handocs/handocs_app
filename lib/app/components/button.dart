@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:handocs_app/app/helpers/constants.dart';
-import 'package:routefly/routefly.dart';
 
 class HDButton {
-  static Widget defaultButton(String textButton) {
+  static Widget defaultButton(String textButton, Function() function) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: DecoratedBox(
@@ -34,9 +33,7 @@ class HDButton {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          onPressed: () {
-            Routefly.push('login');
-          },
+          onPressed: function,
           child: Text(
             textButton,
             style: TextStyle(fontSize: 12, color: HDColor.buttonText),
