@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:handocs_app/app/helpers/constants.dart';
 
 class HDButton {
-  static Widget defaultButton(String textButton) {
+  static Widget defaultButton(String textButton, Function() function) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: DecoratedBox(
@@ -16,8 +15,8 @@ class HDButton {
                   HDColor.buttonBronze,
                   HDColor.buttonBronzeLight,
                 ],
-                stops: [0.20, 0.50, 0.90],
-                transform: GradientRotation(1)),
+                stops: const  [0.20, 0.50, 0.90],
+                transform: const GradientRotation(1)),
             borderRadius: BorderRadius.circular(5),
             boxShadow: const <BoxShadow>[
               BoxShadow(
@@ -34,7 +33,7 @@ class HDButton {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          onPressed: () {},
+          onPressed: function,
           child: Text(
             textButton,
             style: TextStyle(fontSize: 12, color: HDColor.buttonText),
