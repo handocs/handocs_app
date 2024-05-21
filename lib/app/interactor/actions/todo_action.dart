@@ -3,12 +3,20 @@ import 'package:handocs_app/app/interactor/models/todo_model.dart';
 
 var _autoIncrement = 4;
 
-Future<void> fetchTodo() async {
+Future<void> fetchTodos() async {
   todoState.value = [
-    TodoModel(id: 1, title: 'Teste 01', check: false),
+    TodoModel(id: 1, title: 'Teste 01', check: true),
     TodoModel(id: 2, title: 'Teste 02', check: false),
-    TodoModel(id: 3, title: 'Teste 03', check: false),
+    TodoModel(id: 3, title: 'Teste 03', check: true),
     TodoModel(id: 4, title: 'Teste 04', check: false),
+    TodoModel(id: 5, title: 'Teste 05', check: false),
+    TodoModel(id: 6, title: 'Teste 06', check: false),
+    TodoModel(id: 1, title: 'Teste 01', check: true),
+    TodoModel(id: 2, title: 'Teste 02', check: false),
+    TodoModel(id: 3, title: 'Teste 03', check: true),
+    TodoModel(id: 4, title: 'Teste 04', check: false),
+    TodoModel(id: 5, title: 'Teste 05', check: false),
+    TodoModel(id: 6, title: 'Teste 06', check: false),
   ];
 }
 
