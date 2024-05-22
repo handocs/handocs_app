@@ -3,22 +3,7 @@ import 'package:handocs_app/app/interactor/models/todo_model.dart';
 
 var _autoIncrement = 4;
 
-Future<void> fetchTodos() async {
-  todoState.value = [
-    TodoModel(id: 1, title: 'Teste 01', check: true),
-    TodoModel(id: 2, title: 'Teste 02', check: false),
-    TodoModel(id: 3, title: 'Teste 03', check: true),
-    TodoModel(id: 4, title: 'Teste 04', check: false),
-    TodoModel(id: 5, title: 'Teste 05', check: false),
-    TodoModel(id: 6, title: 'Teste 06', check: false),
-    TodoModel(id: 1, title: 'Teste 01', check: true),
-    TodoModel(id: 2, title: 'Teste 02', check: false),
-    TodoModel(id: 3, title: 'Teste 03', check: true),
-    TodoModel(id: 4, title: 'Teste 04', check: false),
-    TodoModel(id: 5, title: 'Teste 05', check: false),
-    TodoModel(id: 6, title: 'Teste 06', check: false),
-  ];
-}
+Future<void> fetchTodos() async {  todoState.value = [];}
 
 Future<void> putTodo(TodoModel model) async {
   if (model.id == -1) {
@@ -36,6 +21,4 @@ Future<void> putTodo(TodoModel model) async {
   }
 }
 
-Future<void> deleteTodo(int id) async {
-  todoState.value = todoState.value.where((e) => e.id != id).toList();
-}
+Future<void> deleteTodo(int id) async {  todoState.value = todoState.value.where((e) => e.id != id).toList();}
