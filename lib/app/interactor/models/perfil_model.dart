@@ -2,11 +2,11 @@ class PerfilModel {
   final String email;
   final String nome;
   final String senha;
-  final String codigoAcesso;
-  final String codigoAcessoValidade;
+  final String? codigoAcesso;
+  final String? codigoAcessoValidade;
   final bool biometria;
   final DateTime criadoEm;
-  final DateTime atualizadoEm;
+  final DateTime? atualizadoEm;
 
   PerfilModel(
       {required this.email,
