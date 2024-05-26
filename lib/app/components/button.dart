@@ -15,7 +15,7 @@ class HDButton {
                   HDColor.buttonBronze,
                   HDColor.buttonBronzeLight,
                 ],
-                stops: const  [0.20, 0.50, 0.90],
+                stops: const [0.20, 0.50, 0.90],
                 transform: const GradientRotation(1)),
             borderRadius: BorderRadius.circular(5),
             boxShadow: const <BoxShadow>[

@@ -1,6 +1,5 @@
 import 'package:handocs_app/app/injector.dart';
 import 'package:handocs_app/app/interactor/repositories/perfil_repository.dart';
-
 import '../atoms/perfil_atom.dart';
 import '../models/perfil_model.dart';
 

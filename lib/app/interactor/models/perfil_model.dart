@@ -5,18 +5,18 @@ class PerfilModel {
   final String? codigoAcesso;
   final String? codigoAcessoValidade;
   final bool biometria;
-  final DateTime criadoEm;
-  final DateTime? atualizadoEm;
+  final String? criadoEm;
+  final String? atualizadoEm;
 
   PerfilModel(
-      {required this.email,
-      required this.nome,
+      {required this.nome,
+      required this.email,
       required this.senha,
-      required this.codigoAcesso,
-      required this.codigoAcessoValidade,
+      this.codigoAcesso,
+      this.codigoAcessoValidade,
       required this.biometria,
-      required this.criadoEm,
-      required this.atualizadoEm});
+      this.criadoEm,
+      this.atualizadoEm});
 
   PerfilModel copyWith(
       {String? email,
@@ -25,8 +25,8 @@ class PerfilModel {
       String? codigoAcesso,
       String? codigoAcessoValidade,
       bool? biometria,
-      DateTime? criadoEm,
-      DateTime? atualizadoEm}) {
+      String? criadoEm,
+      String? atualizadoEm}) {
     return PerfilModel(
         email: email ?? this.email,
         nome: nome ?? this.nome,

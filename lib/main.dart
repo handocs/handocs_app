@@ -3,7 +3,8 @@ import 'package:handocs_app/app/app_widget.dart';
 import 'package:handocs_app/app/injector.dart';
 
 void main() {
-  RegisterInstances();
+  registerInstances();
+
   runApp(const AppWidget());
 }
 

@@ -4,6 +4,7 @@ import 'app/(public)/category_page.dart' as a0;
 import 'app/(public)/home_page.dart' as a1;
 import 'app/(public)/login_page.dart' as a2;
 import 'app/(public)/logo_page.dart' as a3;
+import 'app/(public)/register_page.dart' as a4;
 
 List<RouteEntity> get routes => [
   RouteEntity(
@@ -42,6 +43,15 @@ List<RouteEntity> get routes => [
       const a3.LogoPage(),
     ),
   ),
+  RouteEntity(
+    key: '/register',
+    uri: Uri.parse('/register'),
+    routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
+      ctx,
+      settings,
+      const a4.RegisterPage(),
+    ),
+  ),
 ];
 
 const routePaths = (
@@ -50,4 +60,5 @@ const routePaths = (
   home: '/home',
   login: '/login',
   logo: '/logo',
+  register: '/register',
 );

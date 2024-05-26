@@ -1,4 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:handocs_app/app/interactor/actions/perfil_action.dart';
+import 'package:handocs_app/app/interactor/atoms/perfil_atom.dart';
+import 'package:handocs_app/app/interactor/models/perfil_model.dart';
 import 'package:routefly/routefly.dart';
 import '../components/button.dart';
 import '../helpers/constants.dart';
@@ -11,6 +17,44 @@ class LogoPage extends StatefulWidget {
 }
 
 class _LogoPageState extends State<LogoPage> {
+  String _textEntrar = 'ENTRAR';
+
+  void _gotoLogin() {
+    setState(() {
+      _textEntrar = 'Aguarde...';
+      fetchPerfils().then((value) {
+        _textEntrar = 'ENTRAR';
+
+        final perfis = perfilState.value;
+
+        if (perfis.length == 0) {
+          Routefly.push('register');
+          return;
+        }
+
+        PerfilModel perfil = perfis.first;
+
+        if (perfil.codigoAcesso != null) {
+          Routefly.push('login');
+          return;
+        }
+
+        if (!perfil.biometria) {
+          Routefly.push('login');
+          return;
+        } else {
+          //TODO: Implementar Biometria
+          //throw UnimplementedError();
+        }
+
+        Routefly.push('home');
+
+      }, onError: (e) {
+        _textEntrar = 'ENTRAR';
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,15 +79,10 @@ class _LogoPageState extends State<LogoPage> {
               height: 250,
             ),
             const SizedBox(width: 30, height: 80),
-            HDButton.defaultButton('ENTRAR', _gotoLogin),
-            const SizedBox(width: 70, height: 20),
-            HDButton.defaultButton('CADASTRAR', _gotoLogin),
+            HDButton.defaultButton(_textEntrar, _gotoLogin),
+            //const SizedBox(width: 70, height: 20),
+            //HDButton.defaultButton('CADASTRAR', _gotoLogin),
           ])),
     );
   }
-
-  void _gotoLogin(){
-    Routefly.push('login');
-  }
-
 }
