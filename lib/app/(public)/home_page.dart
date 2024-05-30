@@ -1,10 +1,11 @@
 import 'package:asp/asp.dart';
 import 'package:flutter/material.dart';
-import 'package:handocs_app/app/interactor/actions/todo_action.dart';
+import 'package:handocs_app/app/interactor/actions/categoria_action.dart';
+import 'package:handocs_app/app/interactor/atoms/categoria_atom.dart';
+import 'package:routefly/routefly.dart';
 import '../components/appbar.dart';
 import '../components/grid_categories.dart';
 import '../helpers/constants.dart';
-import '../interactor/atoms/todo_atom.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,14 +18,25 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    fetchTodos();
+
+    setState(() {
+      fetchCategorias().then((value) {
+        if (categoriaState.value.isEmpty) putCategoriasDemo();
+      });
+    });
   }
 
   Widget build(BuildContext context) {
     return RxBuilder(builder: (_) {
-      final todos = todoState.value;
+      final categorias = categoriaState.value;
       return Scaffold(
-        appBar: HDAppBar.defaultAppBar(context, 'HOME', true, true),
+        appBar: HDAppBar.defaultAppBar(context, 'HOME', true, true, [
+          IconButton(
+              icon: Icon(Icons.add, color: HDColor.bronzeLight),
+              onPressed: () {
+                Routefly.push('category_edit');
+              })
+        ]),
         body: DefaultTabController(
           length: 2,
           child: Column(
@@ -37,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                     indicatorColor: HDColor.bronzeLight,
                     tabs: const [
                       Tab(text: 'CATEGORIAS'),
-                      Tab(text: 'PESQUISA'),
+                      Tab(text: 'COMPARTILHADOS'),
                     ],
                     labelColor: HDColor.bronzeLight,
                   ),
@@ -46,8 +58,8 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    HDGridCategories.defaultGridCategories(todos),
-                    HDGridCategories.defaultGridCategories(todos),
+                    HDGridCategories.defaultGridCategories(categorias),
+                    HDGridCategories.defaultGridCategories(categorias),
                   ],
                 ),
               ),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:handocs_app/app/helpers/constants.dart';
 
 class HDButton {
-  static Widget defaultButton(String textButton, Function() function) {
+  static Widget defaultButton(String textButton, Function() function,
+      [IconData? icon]) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
       child: DecoratedBox(
@@ -34,12 +35,33 @@ class HDButton {
             ),
           ),
           onPressed: function,
-          child: Text(
-            textButton,
-            style: TextStyle(fontSize: 12, color: HDColor.buttonText),
-          ),
+          child: _textButton(icon, textButton),
         ),
       ),
     );
+  }
+
+  static Widget _textButton(IconData? icon, String textButton) {
+    if (icon != null) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Icon(
+              icon,
+              color: HDColor.buttonText,
+              size: 36.0,
+            ),
+            //const SizedBox(          width: 10,        ),
+            Text(
+              '        $textButton',
+              style: TextStyle(fontSize: 16, color: HDColor.buttonText),
+            )
+          ]);
+    } else {
+      return Text(
+        textButton,
+        style: TextStyle(fontSize: 12, color: HDColor.buttonText),
+      );
+    }
   }
 }

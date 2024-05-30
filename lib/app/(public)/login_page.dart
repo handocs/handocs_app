@@ -16,15 +16,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
-  final perfil = perfilState.value[0];
+
   String _labelErro = '';
 
   void _login() {
-
     setState(() {
+
+      final perfil = perfilState.value[0];
 
       _labelErro = '';
 
@@ -40,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final perfil = perfilState.value[0];
 
     emailController.text = perfil.email;
     senhaController.text = perfil.senha;
@@ -49,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
         appBar:
             HDAppBar.defaultAppBar(context, 'ACESSO A APLICAÇÃO', false, true),
         body: Container(
-            alignment: Alignment.center,
+            alignment: Alignment.center ,
             //color: Colors.black87,
             decoration: BoxDecoration(
               color: HDColor.bodyBackground,
@@ -70,8 +71,11 @@ class _LoginPageState extends State<LoginPage> {
                       const EdgeInsets.fromLTRB(30, 50, 30, 10),
                       emailController,
                       TextCapitalization.sentences),
-                  HDText.defaultInputText('Senha', true,
-                      const EdgeInsets.fromLTRB(30, 5, 30, 10), senhaController),
+                  HDText.defaultInputText(
+                      'Senha',
+                      true,
+                      const EdgeInsets.fromLTRB(30, 5, 30, 10),
+                      senhaController),
                   Text(
                     _labelErro,
                     style: TextStyle(color: HDColor.labelError),

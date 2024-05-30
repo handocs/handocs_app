@@ -1,14 +1,12 @@
-import 'package:flutter/material.dart';
-
 class CategoriaModel {
   final int id;
   final String nome;
-  final Icon icone;
+  final int icone;
   final int qtdeItens;
   final int qtdeCompartilhados;
-  final DateTime criadoEm;
-  final DateTime atualizadoEm;
-  final DateTime deletadoEm;
+  final String criadoEm;
+  final String? atualizadoEm;
+  final String? deletadoEm;
 
   CategoriaModel(
       {required this.id,
@@ -17,18 +15,18 @@ class CategoriaModel {
       required this.qtdeItens,
       required this.qtdeCompartilhados,
       required this.criadoEm,
-      required this.atualizadoEm,
-      required this.deletadoEm});
+      this.atualizadoEm,
+      this.deletadoEm});
 
   CategoriaModel copyWith(
       {int? id,
       String? nome,
-      Icon? icone,
+      int? icone,
       int? qtdeItens,
       int? qtdeCompartilhados,
-      DateTime? criadoEm,
-      DateTime? atualizadoEm,
-      DateTime? deletadoEm}) {
+      String? criadoEm,
+      String? atualizadoEm,
+      String? deletadoEm}) {
     return CategoriaModel(
         id: id ?? this.id,
         nome: nome ?? this.nome,

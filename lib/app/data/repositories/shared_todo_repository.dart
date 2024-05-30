@@ -1,45 +1,45 @@
 import 'dart:convert';
-import 'package:handocs_app/app/data/adapters/perfil_adapter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:handocs_app/app/interactor/repositories/perfil_repository.dart';
-import '../../interactor/models/perfil_model.dart';
+import '../../interactor/models/todo_model.dart';
+import '../../interactor/repositories/todo_repository.dart';
+import '../adapters/todo_adapter.dart';
 
-const _key = 'PERFIL';
+const _key = 'TODO';
 
-class SharedPerfilRepository implements PerfilRepository {
+class SharedTodoRepository implements TodoRepository {
   @override
-  Future<List<PerfilModel>> getAll() async {
+  Future<List<TodoModel>> getAll() async {
     final shared = await SharedPreferences.getInstance();
     final json = shared.getString(_key);
     if (json == null) return [];
     final list = jsonDecode(json) as List;
-    return list.map((e) => PerfilAdapter.fromMap(e)).toList();
+    return list.map((e) => TodoAdapter.fromMap(e)).toList();
   }
 
   @override
-  Future<PerfilModel> insert(PerfilModel model) async {
+  Future<TodoModel> insert(TodoModel model) async {
     final shared = await SharedPreferences.getInstance();
     final json = shared.getString(_key) ?? '[]';
     final list = jsonDecode(json) as List;
     //final email = list.isEmpty ? model.email : list.last['email'];
     //final newModel = model.copyWith(email: email);
-    list.add(PerfilAdapter.toMap(model));
+    list.add(TodoAdapter.toMap(model));
     await shared.setString(_key, jsonEncode(list));
     return model;
   }
 
   @override
-  Future<PerfilModel> update(PerfilModel model) async {
+  Future<TodoModel> update(TodoModel model) async {
     return insert(model);
   }
 
   @override
-  Future<bool> delete(String email) async {
+  Future<bool> delete(int id) async {
     final shared = await SharedPreferences.getInstance();
     final json = shared.getString(_key) ?? '[]';
     final list = jsonDecode(json) as List;
-    final index = list.lastIndexWhere((e) => e['email' == email]);
-    if (index == -1) throw Exception('Perfil não encontrado.');
+    final index = list.lastIndexWhere((e) => e['id' == id]);
+    if (index == -1) throw Exception('Todo não encontrado.');
     list.removeAt(index);
     await shared.setString(_key, jsonEncode(list));
     return true;

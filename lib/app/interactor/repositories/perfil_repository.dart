@@ -1,4 +1,4 @@
-import 'package:handocs_app/app/interactor/models/perfil_model.dart';
+import '../models/perfil_model.dart';
 
 abstract class PerfilRepository {
   Future<List<PerfilModel>> getAll();

@@ -1,30 +1,27 @@
 import 'package:handocs_app/app/interactor/atoms/todo_atom.dart';
 import 'package:handocs_app/app/interactor/models/todo_model.dart';
+import '../../injector.dart';
+import '../repositories/todo_repository.dart';
 
 var _autoIncrement = 4;
 
 Future<void> fetchTodos() async {
-  todoState.value = [
-    TodoModel(id: 1, title: 'Title 01', check: false)
-  ];
+  final repository = injector.get<TodoRepository>();
+  todoState.value = await repository.getAll();
 }
 
 Future<void> putTodo(TodoModel model) async {
-  if (model.id == -1) {
-    //create
-    _autoIncrement++;
-    todoState.value = [
-      ...todoState.value,
-      model.copyWith(id: _autoIncrement),
-    ];
+  final repository = injector.get<TodoRepository>();
+  if (model.id <= 0) {
+    await repository.insert(model);
   } else {
-    //update
-    final index = todoState.value.indexWhere((e) => e.id == model.id);
-    todoState.value[index] = model;
-    todoState();
+    await repository.update(model);
   }
+  fetchTodos();
 }
 
 Future<void> deleteTodo(int id) async {
-  todoState.value = todoState.value.where((e) => e.id != id).toList();
+  final repository = injector.get<TodoRepository>();
+  await repository.delete(id);
+  fetchTodos();
 }

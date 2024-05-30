@@ -1,45 +1,45 @@
 import 'dart:convert';
-import 'package:handocs_app/app/data/adapters/perfil_adapter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:handocs_app/app/interactor/repositories/perfil_repository.dart';
-import '../../interactor/models/perfil_model.dart';
+import '../../interactor/models/categoria_model.dart';
+import '../../interactor/repositories/categoria_repository.dart';
+import '../adapters/categoria_adapter.dart';
 
-const _key = 'PERFIL';
+const _key = 'CATEGORIA';
 
-class SharedPerfilRepository implements PerfilRepository {
+class SharedCategoriaRepository implements CategoriaRepository {
   @override
-  Future<List<PerfilModel>> getAll() async {
+  Future<List<CategoriaModel>> getAll() async {
     final shared = await SharedPreferences.getInstance();
     final json = shared.getString(_key);
     if (json == null) return [];
     final list = jsonDecode(json) as List;
-    return list.map((e) => PerfilAdapter.fromMap(e)).toList();
+    return list.map((e) => CategoriaAdapter.fromMap(e)).toList();
   }
 
   @override
-  Future<PerfilModel> insert(PerfilModel model) async {
+  Future<CategoriaModel> insert(CategoriaModel model) async {
     final shared = await SharedPreferences.getInstance();
     final json = shared.getString(_key) ?? '[]';
     final list = jsonDecode(json) as List;
     //final email = list.isEmpty ? model.email : list.last['email'];
     //final newModel = model.copyWith(email: email);
-    list.add(PerfilAdapter.toMap(model));
+    list.add(CategoriaAdapter.toMap(model));
     await shared.setString(_key, jsonEncode(list));
     return model;
   }
 
   @override
-  Future<PerfilModel> update(PerfilModel model) async {
+  Future<CategoriaModel> update(CategoriaModel model) async {
     return insert(model);
   }
 
   @override
-  Future<bool> delete(String email) async {
+  Future<bool> delete(int id) async {
     final shared = await SharedPreferences.getInstance();
     final json = shared.getString(_key) ?? '[]';
     final list = jsonDecode(json) as List;
-    final index = list.lastIndexWhere((e) => e['email' == email]);
-    if (index == -1) throw Exception('Perfil não encontrado.');
+    final index = list.lastIndexWhere((e) => e['id' == id]);
+    if (index == -1) throw Exception('Categoria não encontrado.');
     list.removeAt(index);
     await shared.setString(_key, jsonEncode(list));
     return true;
