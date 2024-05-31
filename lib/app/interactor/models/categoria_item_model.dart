@@ -9,11 +9,11 @@ class CategoriaItemModel {
   final String ref03;
   final String ref04;
   final bool favoritado;
-  final DateTime validade;
+  final String validade;
   final String tags;
-  final DateTime criadoEm;
-  final DateTime atualizadoEm;
-  final DateTime deletadoEm;
+  final String criadoEm;
+  final String? atualizadoEm;
+  final String? deletadoEm;
 
   CategoriaItemModel(
       {required this.id,
@@ -29,8 +29,8 @@ class CategoriaItemModel {
       required this.validade,
       required this.tags,
       required this.criadoEm,
-      required this.atualizadoEm,
-      required this.deletadoEm});
+      this.atualizadoEm,
+      this.deletadoEm});
 
   CategoriaItemModel copyWith(
       {int? id,
@@ -43,11 +43,11 @@ class CategoriaItemModel {
       String? ref03,
       String? ref04,
       bool? favoritado,
-      DateTime? validade,
+      String? validade,
       String? tags,
-      DateTime? criadoEm,
-      DateTime? atualizadoEm,
-      DateTime? deletadoEm}) {
+      String? criadoEm,
+      String? atualizadoEm,
+      String? deletadoEm}) {
     return CategoriaItemModel(
         id: id ?? this.id,
         categoriaId: categoriaId ?? this.categoriaId,
