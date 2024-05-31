@@ -1,13 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:handocs_app/app/helpers/constants.dart';
+import 'package:handocs_app/app/interactor/models/categoria_model.dart';
 import 'package:routefly/routefly.dart';
 
 class HDCardCategory {
-  static Widget defaultCardCategory(
-      String text, IconData icon, int numShare, int numDocs) {
+  //static Widget defaultCardCategory(int id, String text, IconData icon, int numShare,      int numDocs, bool edit, bool delete, Function() fOnTap) {
+  static defaultCardCategory(CategoriaModel categoriaModel, bool edit,
+      bool delete, Function(CategoriaModel model) fOnTap) {
     return GestureDetector(
         onTap: () {
-          Routefly.push('category');
+          fOnTap(categoriaModel);
         },
         child: Card(
           child: Container(
@@ -27,13 +30,15 @@ class HDCardCategory {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    _buttomAction(edit, delete),
                     Icon(
-                      icon,
+                      IconData(categoriaModel.icone,
+                          fontFamily: 'MaterialIcons'),
                       color: HDColor.bronzeLight,
                       size: 40.0,
                     ),
                     Text(
-                      text,
+                      categoriaModel.nome,
                       style: TextStyle(
                           fontSize: 14,
                           //fontWeight: FontWeight.bold,
@@ -51,7 +56,7 @@ class HDCardCategory {
                               color: HDColor.bronzeLight,
                             ),
                             Text(
-                              ' $numShare',
+                              ' ${categoriaModel.qtdeCompartilhados}',
                               style: TextStyle(
                                   color: HDColor.bronzeLight, fontSize: 14),
                             )
@@ -65,7 +70,7 @@ class HDCardCategory {
                               color: HDColor.bronzeLight,
                             ),
                             Text(
-                              ' $numDocs',
+                              ' ${categoriaModel.qtdeItens}',
                               style: TextStyle(
                                   color: HDColor.bronzeLight, fontSize: 14),
                             )
@@ -79,5 +84,37 @@ class HDCardCategory {
             ),
           ),
         ));
+  }
+
+  static Widget _buttomAction(bool edit, bool delete) {
+    IconData iconAction = Icons.circle_rounded;
+    debugPrint('Edit:$edit | Delete: $delete');
+    if (edit) {
+      iconAction = Icons.edit_note;
+    }
+    if (delete) {
+      iconAction = Icons.close;
+    }
+
+    if (edit || delete) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+              padding: const EdgeInsets.all(1.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: HDColor.bronzeLight,
+              ),
+              child: Icon(
+                iconAction,
+                color: HDColor.bodyBackground,
+                size: 20.0,
+              )),
+        ],
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 }

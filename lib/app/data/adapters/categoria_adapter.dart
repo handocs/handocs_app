@@ -5,6 +5,7 @@ class CategoriaAdapter {
     return {
       'id': model.id,
       'nome': model.nome,
+      'tipo': model.tipo,
       'icone': model.icone,
       'qtdeItens': model.qtdeItens,
       'qtdeCompartilhados': model.qtdeCompartilhados,
@@ -18,6 +19,7 @@ class CategoriaAdapter {
     return CategoriaModel(
         id: map['id'],
         nome: map['nome'],
+        tipo: map['tipo'],
         icone: map['icone'],
         qtdeItens: map['qtdeItens'],
         qtdeCompartilhados: map['qtdeCompartilhados'],

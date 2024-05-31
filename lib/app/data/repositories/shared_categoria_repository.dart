@@ -21,16 +21,23 @@ class SharedCategoriaRepository implements CategoriaRepository {
     final shared = await SharedPreferences.getInstance();
     final json = shared.getString(_key) ?? '[]';
     final list = jsonDecode(json) as List;
-    //final email = list.isEmpty ? model.email : list.last['email'];
-    //final newModel = model.copyWith(email: email);
-    list.add(CategoriaAdapter.toMap(model));
+    final id = list.isEmpty ? 1 : list.last['id'] + 1;
+    final newModel = model.copyWith(id: id);
+    list.add(CategoriaAdapter.toMap(newModel));
     await shared.setString(_key, jsonEncode(list));
-    return model;
+    return newModel;
   }
 
   @override
   Future<CategoriaModel> update(CategoriaModel model) async {
-    return insert(model);
+    final shared = await SharedPreferences.getInstance();
+    final json = shared.getString(_key) ?? '[]';
+    final list = jsonDecode(json) as List;
+    final index = list.lastIndexWhere((e) => e['id'] == model.id);
+    if (index == -1) throw Exception('Categoria não encontrado.');
+    list[index] = CategoriaAdapter.toMap(model);
+    await shared.setString(_key, jsonEncode(list));
+    return model;
   }
 
   @override
@@ -38,7 +45,7 @@ class SharedCategoriaRepository implements CategoriaRepository {
     final shared = await SharedPreferences.getInstance();
     final json = shared.getString(_key) ?? '[]';
     final list = jsonDecode(json) as List;
-    final index = list.lastIndexWhere((e) => e['id' == id]);
+    final index = list.lastIndexWhere((e) => e['id'] == id);
     if (index == -1) throw Exception('Categoria não encontrado.');
     list.removeAt(index);
     await shared.setString(_key, jsonEncode(list));

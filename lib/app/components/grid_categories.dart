@@ -4,7 +4,9 @@ import 'package:handocs_app/app/helpers/constants.dart';
 import '../interactor/models/categoria_model.dart';
 
 class HDGridCategories {
-  static Widget defaultGridCategories(List<CategoriaModel> categorias) {
+
+  static Widget defaultGridCategories(List<CategoriaModel> categorias,
+      bool edit, bool delete, Function(CategoriaModel model) onTapItem) {
     return Container(
       color: HDColor.bodyBackground,
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -15,10 +17,10 @@ class HDGridCategories {
         itemBuilder: (ctx, i) {
           final categoria = categorias[i];
           return HDCardCategory.defaultCardCategory(
-              categoria.nome,
-              IconData(categoria.icone, fontFamily: 'MaterialIcons'),
-              categoria.qtdeItens,
-              categoria.qtdeCompartilhados);
+              categoria,
+              edit,
+              delete,
+              onTapItem);
         },
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,

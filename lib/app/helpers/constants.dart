@@ -16,3 +16,14 @@ class HDColor {
 
   static Color cardBackground = const Color.fromRGBO(53, 51, 50, 1.0);
 }
+
+class HDConfirm {
+  static Widget confTitle = const Text(
+    'ATENÇÃO!',
+    style: TextStyle(fontSize: 10.0),
+  );
+  static Widget confContent = const Text('Deseja confirmar essa operação?');
+  static Widget confOK = const Text('OK');
+  static Widget confCANCELAR =
+      const Text('CANCELAR', style: TextStyle(color: Colors.red));
+}

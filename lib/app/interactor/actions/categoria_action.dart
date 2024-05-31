@@ -43,40 +43,45 @@ Future<void> putCategoriasDemo() async {
   final repository = injector.get<CategoriaRepository>();
 
   await putCategoria(CategoriaModel(
-      id: 1,
+      id: 0,
       nome: 'CARTÃO FIN.',
+      tipo: 'CARTAO',
       icone: 0xe19f,
       qtdeItens: 0,
       qtdeCompartilhados: 0,
       criadoEm: DateTime.now().toIso8601String()));
 
   await putCategoria(CategoriaModel(
-      id: 2,
+      id: 0,
       nome: 'CARTÃO VIS.',
+      tipo: 'CONTATO',
       icone: 0xe491,
       qtdeItens: 0,
       qtdeCompartilhados: 0,
       criadoEm: DateTime.now().toIso8601String()));
 
   await putCategoria(CategoriaModel(
-      id: 3,
+      id: 0,
       nome: 'LINKS',
+      tipo: 'LINK',
       icone: 0xe6dd,
       qtdeItens: 0,
       qtdeCompartilhados: 0,
       criadoEm: DateTime.now().toIso8601String()));
 
   await putCategoria(CategoriaModel(
-      id: 4,
+      id: 0,
       nome: 'RECEITAS',
+      tipo: 'RECEITA',
       icone: 0xe39e,
       qtdeItens: 0,
       qtdeCompartilhados: 0,
       criadoEm: DateTime.now().toIso8601String()));
 
   await putCategoria(CategoriaModel(
-      id: 0xe491,
+      id: 0,
       nome: 'DOCUMENTOS',
+      tipo: 'DOCUMENTO',
       icone: 0xe1f2,
       qtdeItens: 0,
       qtdeCompartilhados: 0,
