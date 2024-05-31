@@ -1,8 +1,6 @@
 import 'package:asp/asp.dart';
 import 'package:confirm_dialog/confirm_dialog.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:handocs_app/app/components/card_itemcategory.dart';
 import 'package:handocs_app/app/interactor/actions/categoria_action.dart';
 import 'package:handocs_app/app/interactor/atoms/categoria_atom.dart';
 import 'package:handocs_app/app/interactor/models/categoria_model.dart';
@@ -32,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return RxBuilder(builder: (_) {
       final categorias = categoriaState.value;
@@ -121,7 +120,7 @@ class _HomePageState extends State<HomePage> {
         });
       });
     } else {
-      Routefly.push('category');
+      Routefly.push('category', arguments: model);
     }
   }
 }

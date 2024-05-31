@@ -38,7 +38,7 @@ class SharedTodoRepository implements TodoRepository {
     final shared = await SharedPreferences.getInstance();
     final json = shared.getString(_key) ?? '[]';
     final list = jsonDecode(json) as List;
-    final index = list.lastIndexWhere((e) => e['id' == id]);
+    final index = list.lastIndexWhere((e) => e['id'] == id);
     if (index == -1) throw Exception('Todo não encontrado.');
     list.removeAt(index);
     await shared.setString(_key, jsonEncode(list));

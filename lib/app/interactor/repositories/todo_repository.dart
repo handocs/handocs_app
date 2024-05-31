@@ -1,4 +1,3 @@
-import '../models/perfil_model.dart';
 import '../models/todo_model.dart';
 
 abstract class TodoRepository {

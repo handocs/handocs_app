@@ -14,7 +14,9 @@ class SharedCategoriaItemRepository implements CategoriaItemRepository {
     final json = shared.getString(_key);
     if (json == null) return [];
     final list = jsonDecode(json) as List;
-    return list.map((e) => CategoriaItemAdapter.fromMap(e)).toList();
+    final listFiltered =
+        list.where((e) => e['categoriaId'] == categoriaId).toList();
+    return listFiltered.map((e) => CategoriaItemAdapter.fromMap(e)).toList();
   }
 
   @override

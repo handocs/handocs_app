@@ -1,23 +1,28 @@
+import 'package:handocs_app/app/interactor/actions/categoria_item_action.dart';
 import 'package:handocs_app/app/interactor/atoms/categoria_atom.dart';
+import 'package:handocs_app/app/interactor/models/categoria_item_model.dart';
 import '../../injector.dart';
 import '../models/categoria_model.dart';
 import '../repositories/categoria_repository.dart';
-
-var _autoIncrement = 4;
 
 Future<void> fetchCategorias() async {
   final repository = injector.get<CategoriaRepository>();
   categoriaState.value = await repository.getAll();
 }
 
-Future<void> putCategoria(CategoriaModel model) async {
+Future<CategoriaModel> putCategoria(CategoriaModel model) async {
   final repository = injector.get<CategoriaRepository>();
+  CategoriaModel modelReturn;
+
   if (model.id <= 0) {
-    await repository.insert(model);
+    modelReturn = await repository.insert(model);
   } else {
-    await repository.update(model);
+    modelReturn = await repository.update(model);
   }
+
   fetchCategorias();
+
+  return modelReturn;
 }
 
 Future<void> deleteCategoria(int id) async {
@@ -40,25 +45,87 @@ Future<void> putCategorias(List<CategoriaModel> listModel) async {
 }
 
 Future<void> putCategoriasDemo() async {
-  final repository = injector.get<CategoriaRepository>();
-
+  //DEMO - TIPO CARTAO
   await putCategoria(CategoriaModel(
-      id: 0,
-      nome: 'CARTÃO FIN.',
-      tipo: 'CARTAO',
-      icone: 0xe19f,
-      qtdeItens: 0,
-      qtdeCompartilhados: 0,
-      criadoEm: DateTime.now().toIso8601String()));
+          id: 0,
+          nome: 'CARTÃO FIN.',
+          tipo: 'CARTAO',
+          icone: 0xe19f,
+          qtdeItens: 0,
+          qtdeCompartilhados: 0,
+          criadoEm: DateTime.now().toIso8601String()))
+      .then((value) {
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'Demo 01',
+        descricao: 'Demo item.',
+        ref01: '5555 9999 9999 9999',
+        ref02: 'FULANO T SILVA',
+        ref03: '01/99',
+        ref04: '123',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG01,TAG02',
+        criadoEm: DateTime.now().toIso8601String()));
 
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'Demo 02',
+        descricao: 'Demo item.',
+        ref01: '1111 9999 9999 9999',
+        ref02: 'CICLANO T SILVA',
+        ref03: '01/99',
+        ref04: '123',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG03,TAG04',
+        criadoEm: DateTime.now().toIso8601String()));
+  });
+
+  //DEMO - TIPO CONTATO
   await putCategoria(CategoriaModel(
-      id: 0,
-      nome: 'CARTÃO VIS.',
-      tipo: 'CONTATO',
-      icone: 0xe491,
-      qtdeItens: 0,
-      qtdeCompartilhados: 0,
-      criadoEm: DateTime.now().toIso8601String()));
+          id: 0,
+          nome: 'CARTÃO VIS.',
+          tipo: 'CONTATO',
+          icone: 0xe491,
+          qtdeItens: 0,
+          qtdeCompartilhados: 0,
+          criadoEm: DateTime.now().toIso8601String()))
+      .then((value) {
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'JOAO DA SILVA DEMO',
+        descricao: 'CONTATO DO JOÃO',
+        ref01: 'joao.silva@demo.com',
+        ref02: '(11)9.9999-9999',
+        ref03: 'HANDOCS LTDA',
+        ref04: 'Amigo do fulano.',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG03,TAG04',
+        criadoEm: DateTime.now().toIso8601String()));
+
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'MARIA DA SILVA DEMO',
+        descricao: 'CONTATO DA MARIA',
+        ref01: 'mario.silva@demo.com',
+        ref02: '(11)9.8888-8888',
+        ref03: 'BANCO DO BRASIL LTDA',
+        ref04: 'Gerente de conta.',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG03,TAG04',
+        criadoEm: DateTime.now().toIso8601String()));
+  });
 
   await putCategoria(CategoriaModel(
       id: 0,

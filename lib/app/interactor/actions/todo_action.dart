@@ -3,8 +3,6 @@ import 'package:handocs_app/app/interactor/models/todo_model.dart';
 import '../../injector.dart';
 import '../repositories/todo_repository.dart';
 
-var _autoIncrement = 4;
-
 Future<void> fetchTodos() async {
   final repository = injector.get<TodoRepository>();
   todoState.value = await repository.getAll();

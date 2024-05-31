@@ -1,8 +1,6 @@
 import '../atoms/compartilhamento_atom.dart';
 import '../models/compartilhamento_model.dart';
 
-var _autoIncrement = 4;
-
 Future<void> fetchCompartilhamentos() async {
   compartilhamentoState.value = [];
 }

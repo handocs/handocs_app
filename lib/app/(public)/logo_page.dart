@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:handocs_app/app/interactor/actions/perfil_action.dart';
 import 'package:handocs_app/app/interactor/atoms/perfil_atom.dart';
 import 'package:handocs_app/app/interactor/models/perfil_model.dart';
@@ -27,7 +24,7 @@ class _LogoPageState extends State<LogoPage> {
 
         final perfis = perfilState.value;
 
-        if (perfis.length == 0) {
+        if (perfis.isEmpty) {
           Routefly.push('register');
           return;
         }
@@ -48,7 +45,6 @@ class _LogoPageState extends State<LogoPage> {
         }
 
         Routefly.push('home');
-
       }, onError: (e) {
         _textEntrar = 'ENTRAR';
       });

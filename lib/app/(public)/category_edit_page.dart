@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:handocs_app/app/(public)/register_page.dart';
 import 'package:handocs_app/app/components/button.dart';
-import 'package:handocs_app/app/components/card_itemcategory.dart';
-import 'package:handocs_app/app/components/dropdown.dart';
 import 'package:handocs_app/app/helpers/constants.dart';
 import 'package:handocs_app/app/interactor/actions/categoria_action.dart';
 import 'package:handocs_app/app/interactor/models/categoria_model.dart';
@@ -27,13 +24,13 @@ class _CategoryEditPageState extends State<CategoryEditPage> {
   void initState() {
     super.initState();
 
-    final _arguments = Routefly.query.arguments;
+    final arguments = Routefly.query.arguments;
 
-    if (_arguments != null) {
-      _categoriaModel = _arguments as CategoriaModel;
+    if (arguments != null) {
+      _categoriaModel = arguments as CategoriaModel;
     }
 
-    if (_arguments == null) {
+    if (arguments == null) {
       _createState = true;
       _editState = false;
     } else {
@@ -43,6 +40,7 @@ class _CategoryEditPageState extends State<CategoryEditPage> {
   }
 
   final TextEditingController _nomeController = TextEditingController();
+
   String _labelErro = '';
 
   void _regSALVAR() {

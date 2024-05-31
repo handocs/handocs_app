@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:handocs_app/app/helpers/constants.dart';
 import 'package:handocs_app/app/interactor/models/categoria_model.dart';
-import 'package:routefly/routefly.dart';
 
 class HDCardCategory {
   //static Widget defaultCardCategory(int id, String text, IconData icon, int numShare,      int numDocs, bool edit, bool delete, Function() fOnTap) {

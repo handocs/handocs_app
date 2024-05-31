@@ -1,11 +1,9 @@
 import 'package:asp/asp.dart';
 import 'package:flutter/material.dart';
 import 'package:handocs_app/app/interactor/actions/perfil_action.dart';
-import 'package:handocs_app/app/interactor/atoms/perfil_atom.dart';
 import 'package:handocs_app/app/interactor/models/perfil_model.dart';
 import '../components/text.dart';
 import '../components/appbar.dart';
-import '../components/button.dart';
 import 'package:routefly/routefly.dart';
 
 import '../helpers/constants.dart';
@@ -18,7 +16,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
@@ -26,7 +23,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _registrar() {
     setState(() {
-
       _labelErro = '';
 
       if (_nomeController.text.trim() == '') {
@@ -58,14 +54,12 @@ class _RegisterPageState extends State<RegisterPage> {
       putPerfil(perfil);
 
       Routefly.replace('home');
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return RxBuilder(builder: (_) {
-      final perfis = perfilState.value;
       return Scaffold(
           appBar: HDAppBar.defaultAppBar(context, 'REGISTRO', false, true),
           body: Container(
@@ -169,7 +163,7 @@ class SwitchListTileControl extends StatefulWidget {
 class _SwitchListTileState extends State<SwitchListTileControl> {
   @override
   Widget build(BuildContext context) {
-    bool _biometry = false;
+    bool biometry = false;
 
     return SwitchListTile(
       title: Text(
@@ -180,10 +174,10 @@ class _SwitchListTileState extends State<SwitchListTileControl> {
             fontWeight: FontWeight.bold),
       ),
       tileColor: HDColor.buttonBronze,
-      value: _biometry,
+      value: biometry,
       onChanged: (bool value) {
         setState(() {
-          _biometry = value;
+          biometry = value;
         });
       },
       secondary: Icon(
