@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:handocs_app/app/helpers/constants.dart';
 import 'package:handocs_app/app/interactor/models/categoria_item_model.dart';
 import 'package:routefly/routefly.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HDCardItemCategory {
   static Widget defaultCardItemCategory(CategoriaItemModel itemModel) {
@@ -20,6 +21,8 @@ class HDCardItemCategory {
       return cardItemCartao(itemModel);
     } else if (tipo == 'CONTATO') {
       return cardItemContato(itemModel);
+    } else if (tipo == 'LINK') {
+      return cardItemLink(itemModel);
     } else {
       return cardItemCartao(itemModel);
     }
@@ -296,5 +299,100 @@ class HDCardItemCategory {
         ),
       ),
     );
+  }
+
+  static Widget cardItemLink(CategoriaItemModel itemModel) {
+    return Card(
+      child: Container(
+        padding: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: const Border(
+                top: BorderSide.none,
+                right: BorderSide.none,
+                left: BorderSide.none,
+                bottom: BorderSide.none),
+            color: HDColor.cardBackground),
+        //margin: EdgeInsets.all(5),
+        //padding: EdgeInsets.all(5),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      Icon(
+                        Icons.hexagon_outlined,
+                        size: 20,
+                        color: HDColor.bronzeLight,
+                      ),
+                      const SizedBox(width: 15.0),
+                      Text(
+                        itemModel.nome,
+                        style: TextStyle(
+                            fontSize: 20,
+                            //fontWeight: FontWeight.bold,
+                            color: HDColor.bronzeLight),
+                      )
+                    ]),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.star_border_outlined,
+                          color: HDColor.buttonBronze,
+                        ))
+                  ],
+                ),
+                Divider(
+                  color: HDColor.bronzeLight,
+                  thickness: 0.1,
+                ),
+                const SizedBox(width: 1, height: 10),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.link_outlined,
+                      size: 40,
+                      color: HDColor.bronzeLight,
+                    ),
+                    const SizedBox(width: 15.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        _launchURL(itemModel.ref01);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          elevation: 10,
+                          backgroundColor: HDColor.bodyBackground,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            side: BorderSide(color: HDColor.bronzeLight),
+                          )),
+                      child: Text(
+                        itemModel.ref01,
+                        style:
+                            TextStyle(fontSize: 16, color: HDColor.bronzeLight),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static _launchURL(String url) async {
+    final Uri urlParse = Uri.parse(url);
+    if (!await launchUrl(urlParse)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

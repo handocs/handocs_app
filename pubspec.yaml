@@ -41,6 +41,7 @@ dependencies:
   auto_injector: ^2.0.4
   shared_preferences: ^2.2.3
   confirm_dialog: ^1.0.3
+  url_launcher: ^6.3.0
 
 
 dev_dependencies:

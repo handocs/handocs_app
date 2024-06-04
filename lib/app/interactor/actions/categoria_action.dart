@@ -127,14 +127,46 @@ Future<void> putCategoriasDemo() async {
         criadoEm: DateTime.now().toIso8601String()));
   });
 
+  //DEMO - TIPO LINK
   await putCategoria(CategoriaModel(
-      id: 0,
-      nome: 'LINKS',
-      tipo: 'LINK',
-      icone: 0xe6dd,
-      qtdeItens: 0,
-      qtdeCompartilhados: 0,
-      criadoEm: DateTime.now().toIso8601String()));
+          id: 0,
+          nome: 'LINKS',
+          tipo: 'LINK',
+          icone: 0xe6dd,
+          qtdeItens: 0,
+          qtdeCompartilhados: 0,
+          criadoEm: DateTime.now().toIso8601String()))
+      .then((value) {
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'GOOGLE',
+        descricao: 'Sistema de busca.',
+        ref01: 'https://www.google.com',
+        ref02: '',
+        ref03: '',
+        ref04: '',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG05,TAG06',
+        criadoEm: DateTime.now().toIso8601String()));
+
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'TREINAMENTOS',
+        descricao: 'Sistema de treinamentos.',
+        ref01: 'https://www.udemy.com/',
+        ref02: '',
+        ref03: '',
+        ref04: '',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG03,TAG04',
+        criadoEm: DateTime.now().toIso8601String()));
+  });
 
   await putCategoria(CategoriaModel(
       id: 0,
