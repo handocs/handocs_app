@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:handocs_app/app/interactor/actions/categoria_item_action.dart';
 import 'package:handocs_app/app/interactor/atoms/categoria_atom.dart';
 import 'package:handocs_app/app/interactor/models/categoria_item_model.dart';
@@ -50,7 +51,8 @@ Future<void> putCategoriasDemo() async {
           id: 0,
           nome: 'CARTÃO FIN.',
           tipo: 'CARTAO',
-          icone: 0xe19f,
+          //icone: 0xe19f,
+          icone: Icons.credit_card_sharp.codePoint,
           qtdeItens: 0,
           qtdeCompartilhados: 0,
           criadoEm: DateTime.now().toIso8601String()))
@@ -91,7 +93,7 @@ Future<void> putCategoriasDemo() async {
           id: 0,
           nome: 'CARTÃO VIS.',
           tipo: 'CONTATO',
-          icone: 0xe491,
+          icone: Icons.person_pin_outlined.codePoint,
           qtdeItens: 0,
           qtdeCompartilhados: 0,
           criadoEm: DateTime.now().toIso8601String()))
@@ -132,7 +134,7 @@ Future<void> putCategoriasDemo() async {
           id: 0,
           nome: 'LINKS',
           tipo: 'LINK',
-          icone: 0xe6dd,
+          icone: Icons.link_outlined.codePoint,
           qtdeItens: 0,
           qtdeCompartilhados: 0,
           criadoEm: DateTime.now().toIso8601String()))
@@ -169,20 +171,111 @@ Future<void> putCategoriasDemo() async {
   });
 
   await putCategoria(CategoriaModel(
-      id: 0,
-      nome: 'RECEITAS',
-      tipo: 'RECEITA',
-      icone: 0xe39e,
-      qtdeItens: 0,
-      qtdeCompartilhados: 0,
-      criadoEm: DateTime.now().toIso8601String()));
+          id: 0,
+          nome: 'RECEITAS',
+          tipo: 'RECEITA',
+          icone: Icons.local_pharmacy_outlined.codePoint,
+          qtdeItens: 0,
+          qtdeCompartilhados: 0,
+          criadoEm: DateTime.now().toIso8601String()))
+      .then((value) {
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'ESPOSA',
+        descricao: '',
+        ref01: 'Dr. Médico 01',
+        ref02: '123456',
+        ref03: '',
+        ref04: '',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG05,TAG06',
+        criadoEm: DateTime.now().toIso8601String()));
+
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'FILHO 01',
+        descricao: '',
+        ref01: 'Dra. Médica 02',
+        ref02: '112233',
+        ref03: '',
+        ref04: '',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG03,TAG04',
+        criadoEm: DateTime.now().toIso8601String()));
+
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'FILHO 02',
+        descricao: '',
+        ref01: 'Dra. Médica 03',
+        ref02: '98765',
+        ref03: '',
+        ref04: '',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG03,TAG04',
+        criadoEm: DateTime.now().toIso8601String()));
+  });
 
   await putCategoria(CategoriaModel(
-      id: 0,
-      nome: 'DOCUMENTOS',
-      tipo: 'DOCUMENTO',
-      icone: 0xe1f2,
-      qtdeItens: 0,
-      qtdeCompartilhados: 0,
-      criadoEm: DateTime.now().toIso8601String()));
+          id: 0,
+          nome: 'DOCUMENTOS',
+          tipo: 'DOCUMENTO',
+          icone: Icons.document_scanner_outlined.codePoint,
+          qtdeItens: 0,
+          qtdeCompartilhados: 0,
+          criadoEm: DateTime.now().toIso8601String()))
+      .then((value) {
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'DOCUMENTO 01',
+        descricao: 'Texto referente ao documento 01',
+        ref01: '',
+        ref02: '',
+        ref03: '',
+        ref04: '',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG05,TAG06',
+        criadoEm: DateTime.now().toIso8601String()));
+
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'DOCUMENTO 02',
+        descricao: 'Texto referente ao documento 03',
+        ref01: '',
+        ref02: '',
+        ref03: '',
+        ref04: '',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG03,TAG04',
+        criadoEm: DateTime.now().toIso8601String()));
+    putCategoriaItem(CategoriaItemModel(
+        id: 0,
+        categoriaId: value.id,
+        tipo: value.tipo,
+        nome: 'DOCUMENTO 03',
+        descricao: 'Texto referente ao documento 03',
+        ref01: '',
+        ref02: '',
+        ref03: '',
+        ref04: '',
+        favoritado: false,
+        validade: DateTime(1999, 12, 31).toIso8601String(),
+        tags: 'TAG03,TAG04',
+        criadoEm: DateTime.now().toIso8601String()));
+  });
 }
