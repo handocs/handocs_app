@@ -1,5 +1,14 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:asp/asp.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/material.dart';
+import 'package:handocs_app/app/components/button.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
+import '../components/appbar.dart';
+import '../components/text.dart';
 import '../helpers/constants.dart';
 
 class LabPage extends StatefulWidget {
@@ -10,153 +19,196 @@ class LabPage extends StatefulWidget {
 }
 
 class _LabPageState extends State<LabPage> {
+  final TextEditingController _descricaoController = TextEditingController();
+  final TextEditingController _cartaoController = TextEditingController();
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _validadeController = TextEditingController();
+  final TextEditingController _codigoController = TextEditingController();
+  String _labelErro = '';
+
+  final ImagePicker _picker = ImagePicker();
+  final double padding = 20.0;
+
+  XFile? pickedFile = XFile('assets/images/logo.png');
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        padding: const EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: const Border(
-                top: BorderSide.none,
-                right: BorderSide.none,
-                left: BorderSide.none,
-                bottom: BorderSide.none),
-            color: HDColor.cardBackground),
-        //margin: EdgeInsets.all(5),
-        //padding: EdgeInsets.all(5),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Icon(
-                        Icons.contacts_sharp,
-                        size: 20,
-                        color: HDColor.bronzeLight,
-                      ),
-                      const SizedBox(width: 15.0),
+    return RxBuilder(builder: (_) {
+      return Scaffold(
+          appBar: HDAppBar.defaultAppBar(context, 'REGISTRO', false, true),
+          body: Container(
+              alignment: Alignment.center,
+              //color: Colors.black87,
+              decoration: BoxDecoration(
+                color: HDColor.bodyBackground,
+                image: DecorationImage(
+                  image: const AssetImage("images/hexagonos_digitais.jpg"),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.12), BlendMode.dstATop),
+                ),
+              ),
+              child: Center(
+                child: SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        //crossAxisAlignment: CrossAxisAlignment.center ,
+                        children: [
+                      HDText.defaultInputText(
+                          'Descrição',
+                          false,
+                          const EdgeInsets.fromLTRB(30, 5, 30, 10),
+                          _descricaoController,
+                          TextCapitalization.sentences),
                       Text(
-                        'JOAO DA SILVA XAVIER',
-                        style: TextStyle(
-                            fontSize: 20,
-                            //fontWeight: FontWeight.bold,
-                            color: HDColor.bronzeLight),
-                      )
-                    ]),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.star_border_outlined,
-                          color: HDColor.buttonBronze,
-                        ))
-                  ],
-                ),
-                Divider(
-                  color: HDColor.bronzeLight,
-                  thickness: 0.1,
-                ),
-                const SizedBox(width: 1, height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.fromLTRB(2.0, 2.0, 10.0, 2.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0), //or 15.0
+                        "Adicionar documento.",
+                        style: TextStyle(color: HDColor.bronze),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            HDButton.defaultButtonShort(
+                                "GALERIA", _galeria, Icons.image),
+                            HDButton.defaultButtonShort(
+                                "CAMERA", _camera, Icons.camera_alt),
+                            HDButton.defaultButtonShort(
+                                "PDF", () => null, Icons.picture_as_pdf),
+                          ],
+                        ),
+                      ),
+                      DottedBorder(
+                          borderType: BorderType.RRect,
+                          color: HDColor.buttonBronzeLight,
+                          radius: const Radius.circular(10),
+                          strokeWidth: 4,
                           child: Container(
+                            width: 300.0,
                             height: 100.0,
-                            width: 80.0,
-                            color: HDColor.bronze,
-                            child: Image.asset('assets/images/logo.png'),
-                          ),
-                        )),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.contact_mail,
-                              size: 20,
-                              color: HDColor.bronzeLight,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Container(
+                                        color: HDColor.bronzeLight
+                                            .withOpacity(0.3),
+                                        width: 80.0,
+                                        height: 100,
+                                        //child: Image.asset('assets/images/logo.png')
+                                        child: Image.file(
+                                            File(pickedFile!.path)))),
+                                Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Container(
+                                        color: HDColor.bronzeLight
+                                            .withOpacity(0.3),
+                                        width: 80.0,
+                                        height: 100,
+                                        child: Image.asset(
+                                            'assets/images/logo.png'))),
+                                Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Container(
+                                        color: HDColor.bronzeLight
+                                            .withOpacity(0.3),
+                                        width: 80.0,
+                                        height: 100,
+                                        child: Image.asset(
+                                            'assets/images/logo.png'))),
+                              ],
                             ),
-                            const SizedBox(width: 15.0),
-                            Text(
-                              'joao.xavier@teste.com',
-                              style: TextStyle(
-                                  fontSize: 16, color: HDColor.bronzeLight),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.contact_phone,
-                              size: 20,
-                              color: HDColor.bronzeLight,
-                            ),
-                            const SizedBox(width: 15.0),
-                            Text(
-                              '(11)9.9999-8888',
-                              style: TextStyle(
-                                  fontSize: 16, color: HDColor.bronzeLight),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.factory,
-                              size: 20,
-                              color: HDColor.bronzeLight,
-                            ),
-                            const SizedBox(width: 15.0),
-                            Text(
-                              'HANDOCS LTDA',
-                              style: TextStyle(
-                                  fontSize: 16, color: HDColor.bronzeLight),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.note,
-                              size: 20,
-                              color: HDColor.bronzeLight,
-                            ),
-                            const SizedBox(width: 15.0),
-                            Text(
-                              'Informações gerais...',
-                              style: TextStyle(
-                                  fontSize: 16, color: HDColor.bronzeLight),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+                          )),
+                      HDText.defaultInputMaskText(
+                          'Nº Cartão',
+                          false,
+                          const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                          _cartaoController,
+                          MaskTextInputFormatter(mask: "####-####-####-####"),
+                          null,
+                          "9999-9999-9999-9999",
+                          TextInputType.number),
+                      HDText.defaultInputText(
+                          'Nome do Cartão',
+                          false,
+                          const EdgeInsets.fromLTRB(30, 5, 30, 10),
+                          _nomeController),
+                      HDText.defaultInputMaskText(
+                          'Validade',
+                          false,
+                          const EdgeInsets.fromLTRB(30, 5, 30, 10),
+                          _validadeController,
+                          MaskTextInputFormatter(mask: "##/##"),
+                          null,
+                          "99/99",
+                          TextInputType.number),
+                      HDText.defaultInputMaskText(
+                          'Código Segurança',
+                          true,
+                          const EdgeInsets.fromLTRB(30, 5, 30, 10),
+                          _codigoController,
+                          MaskTextInputFormatter(mask: "###"),
+                          null,
+                          "000",
+                          TextInputType.number),
+                      Text(
+                        _labelErro,
+                        style: TextStyle(
+                            color: HDColor.labelError, fontSize: 14.0),
+                      ),
+                      HDButton.defaultButton("REGISTRAR", () => null)
+                    ])),
+              )));
+    });
+  }
+
+  /// Pick an image
+  void _galeria() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        _labelErro = image.path;
+        pickedFile = image;
+      });
+    }
+  }
+
+  /// Capture a photo
+  void _camera() async {
+    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    if (photo != null) {
+      setState(() {
+        _labelErro = photo.path;
+        pickedFile = photo;
+      });
+    }
+  }
+
+  /// Pick a video
+  void pickVideo() async {
+    final XFile? video = await _picker.pickVideo(source: ImageSource.gallery);
+    if (video != null) {
+      setState(() {
+        pickedFile = video;
+      });
+    }
+  }
+
+  /// Capture a video
+  void captureVideo() async {
+    final XFile? capturedVideo =
+        await _picker.pickVideo(source: ImageSource.camera);
+    if (capturedVideo != null) {
+      setState(() {
+        pickedFile = capturedVideo;
+      });
+    }
+  }
+
+  /// Pick multiple images
+  void pickMultipleImages() async {
+    final List<XFile>? images = await _picker.pickMultiImage();
+    //TODO: do something with images
   }
 }

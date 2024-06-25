@@ -8,6 +8,9 @@ class CategoriaItemModel {
   final String ref02;
   final String ref03;
   final String ref04;
+  final String img01;
+  final String img02;
+  final String img03;
   final bool favoritado;
   final String validade;
   final String tags;
@@ -25,6 +28,9 @@ class CategoriaItemModel {
       required this.ref02,
       required this.ref03,
       required this.ref04,
+      required this.img01,
+      required this.img02,
+      required this.img03,
       required this.favoritado,
       required this.validade,
       required this.tags,
@@ -42,6 +48,9 @@ class CategoriaItemModel {
       String? ref02,
       String? ref03,
       String? ref04,
+      String? img01,
+      String? img02,
+      String? img03,
       bool? favoritado,
       String? validade,
       String? tags,
@@ -58,6 +67,9 @@ class CategoriaItemModel {
         ref02: ref02 ?? this.ref02,
         ref03: ref03 ?? this.ref03,
         ref04: ref04 ?? this.ref04,
+        img01: ref01 ?? this.img01,
+        img02: ref02 ?? this.img02,
+        img03: ref03 ?? this.img03,
         favoritado: favoritado ?? this.favoritado,
         validade: validade ?? this.validade,
         tags: tags ?? this.tags,

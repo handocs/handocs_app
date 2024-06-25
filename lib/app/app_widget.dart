@@ -11,7 +11,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
         title: 'HANDOCS',
         debugShowCheckedModeBanner: false,
-        routerConfig: Routefly.routerConfig(
-            routes: routes, initialPath: routePaths.logo));
+        routerConfig:
+            Routefly.routerConfig(routes: routes, initialPath: routePaths.lab));
   }
 }

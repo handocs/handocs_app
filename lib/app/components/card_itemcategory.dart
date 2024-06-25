@@ -608,8 +608,7 @@ class HDCardItemCategory {
                             SizedBox(
                                 width: 200,
                                 child: Text(
-                                  //itemModel.descricao,
-                                  "This text is very very very very very very very very very very very very very very very very very very very very very very very very very long",
+                                  itemModel.descricao,
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
