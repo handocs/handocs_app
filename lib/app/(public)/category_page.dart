@@ -35,7 +35,13 @@ class _CategoryPageState extends State<CategoryPage> {
 
       return Scaffold(
           appBar: HDAppBar.defaultAppBar(
-              context, _categoriaModel.nome, false, true),
+              context, _categoriaModel.nome, true, true, [
+            IconButton(
+                icon: Icon(Icons.add, color: HDColor.bronzeLight),
+                onPressed: () {
+                  Routefly.push('category_item_edit', arguments: null);
+                })
+          ]),
           body: Container(
               color: HDColor.bodyBackground,
               child: ListView.builder(
